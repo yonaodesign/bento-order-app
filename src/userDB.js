@@ -1,6 +1,7 @@
-const users = [
-    {userId: 253, displayName: "Volny Jonas", department: "sales"},
-    {userId: 1, displayName: "Horiuchi Mayuko", department: "CEO"},
+const usersDB = [ 
+    {userId: 253, displayName: "Wow John", department: "sales", nightShifts: false},
+    {userId: 1, displayName: "Horikawa Mako", department: "CEO",  nightShifts: false},
+    {userId: 20, displayName: "Random Joe", department: "hardWorkers",  nightShifts: true},
 ]
 
-module.export = users;
+module.export = usersDB;

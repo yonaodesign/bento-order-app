@@ -15,38 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  .title {
-    width: 25%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  
-  .title h2 {
-    margin: auto;
-  }
-  
-  .tools {
-    width: 25%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  
-  .tools button {
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    border: none;
-  }
-  
-  .tools button span:hover {
-    color: #99cccc;
+    background-color: aquamarine;
   }
   
   .calendar-body {
@@ -62,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background-color: bisque;
   }
   
   .weekday {
@@ -76,13 +46,13 @@
     flex-wrap: wrap;
     justify-content: center;
     box-sizing: border-box;
+    background-color: lightcoral;
   }
   
   .calendar-day {
     width: 125px;
     height: 75px;
     position: relative;
-    border: 1px solid #a6a6a6;
   }
   
   .calendar-day:hover {
