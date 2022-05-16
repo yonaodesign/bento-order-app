@@ -23,15 +23,13 @@ function CalendarDays(props) {
   
       currentDays.push(calendarDay);
     }
-
-    console.log(props.orders.orders)
   
     return (
       <div className="table-content">
         {
           currentDays.map((day) => {
             const thisDayString = day.year + "-" + day.month + "-" + day.number;
-            const thisDayObject = props.orders.orders.find(e=>e.dateId==thisDayString)
+            const thisDayObject = props.orders.find(e=>e.dateId==thisDayString)
 
             return (
               <div className={"calendar-day" + ((thisDayObject !== undefined ? " "+(thisDayObject.type) : "")) + (day.currentMonth ? " current" : "") + (day.selected ? " selected" : "")} id={(day.year + "-" + (day.month) + "-" + day.number)}

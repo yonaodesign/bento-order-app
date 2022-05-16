@@ -93,6 +93,7 @@
     position: absolute;
     right: 10px;
     color: #a6a6a6;
+    user-select: none;
   }
   
   .current p {
