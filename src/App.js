@@ -3,44 +3,22 @@ import {useState} from "react";
 import Calendar from './components/Calendar'
 import Navbar from './components/Navbar';
 import usersDB from './userDB';
+import bentoOrdersDB from './bentoOrdersDB'
+import AdminDisplayTodayOrders from './components/AdminDisplayTodayOrders';
 
 function App() {
-  const [bentoOrders, setBentoOrders] = useState([
-    {userId: 253, dateId: "2022-5-16", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-17", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-18", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-20", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-20", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-25", type: "day", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-27", type: "night", timestamp: "2022"},
-    {userId: 253, dateId: "2022-5-28", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-1", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-2", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-3", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-3", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-20", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-21", type: "day", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-29", type: "night", timestamp: "2022"},
-    {userId: 1, dateId: "2022-5-30", type: "day", timestamp: "2022"},
-  ])
-
-  const [loggedUser, setLoggedUser] = useState({loggedUserId: 253})
-  const whoIs = (who => who.userId == loggedUser.loggedUserId).displayName;
-
+  const [bentoOrders, setBentoOrders] = useState(bentoOrdersDB)
+  const [loggedUser, setLoggedUser] = useState({loggedUserId: 253, displayName: "Satoru Jon"})
+  const [trigger, setTrigger] = useState(false)
   const myResult = bentoOrders.filter(order => order.userId == loggedUser.loggedUserId)
-  console.log("All Orders by LoggedUser:", myResult)
-
-
 
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar name={loggedUser.loggedUserId} />
-        {/* ROUTER */}
-        {/* <button onClick={()=>setLoggedUser({loggedUserId: 1})}>1</button>
-        <button onClick={()=>setLoggedUser({loggedUserId: 253})}>253</button>
-        <button onClick={()=>setLoggedUser({loggedUserId: 20})}>10</button> */}
+        <Navbar name={loggedUser} />
+          <div>{usersDB.map((item, i) => <button key={i} onClick={()=>setLoggedUser({loggedUserId: item.userId, displayName: item.displayName})}>{item.userId}{' '}{item.displayName}</button>)}<button onClick={()=>setTrigger(!trigger)}>管理</button></div>
         <Calendar bentoOrders={bentoOrders} stateChanger={setBentoOrders} users={usersDB} name={loggedUser.loggedUserId} value={myResult}/>
+        {trigger && <AdminDisplayTodayOrders bentoOrders={bentoOrders} names={usersDB}/>}
       </header>
 
     </div>
