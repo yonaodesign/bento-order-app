@@ -6,8 +6,6 @@ const cors = require('cors');
 const path = require('path');
 
 
-
-
 const app = express();
 const PORT = 8888;
 
@@ -51,6 +49,10 @@ app.get('/api/orders/:userId', async (req,res)=>{
 
 app.get('/test', async (req,res)=>{
     res.sendFile(path.join(__dirname+'/index.html'))
+})
+
+app.get('/', async (req,res)=>{
+    res.send('Welcome to the app.')
 })
 
 app.get('*', async (req,res)=>{
