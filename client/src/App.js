@@ -8,6 +8,11 @@ import styled from 'styled-components'
 import { Offline, Online } from "react-detect-offline"
 import OfflineMessage from './components/OfflineMessage';
 
+import {store} from './app/store';
+import {LogUser} from './features/logUser/LogUser'
+
+const state = store.getState();
+
 
 const PrettyButton = styled.button`
 padding: 10px;
@@ -48,26 +53,30 @@ const [trigger, setTrigger] = useState(false)
 
 
   return (
-    <div className="App">
+       <div className="App">
       <Online>
+
       <header>
+
         <Navbar name={loggedUser} />
           <SwitcherBar>
-            <div>
+            {/* <div>
             {usersDB.map((item, i) => <PrettyButton key={i} onClick={()=>setLoggedUser({loggedUserId: item.userId, displayName: item.displayName})}>{item.userId}{' '}{item.displayName}</PrettyButton>)}
-            </div>
+            </div> */}
             <PrettyButton onClick={()=>setTrigger(!trigger)}>本日の注文管理</PrettyButton>
-
           </SwitcherBar>
-        <Calendar bentoOrders={bentoOrders} stateChanger={setBentoOrders} users={usersDB} name={loggedUser.loggedUserId} value={myResult}/>
+          
+       <Calendar bentoOrders={bentoOrders} stateChanger={setBentoOrders} users={usersDB} name={loggedUser.loggedUserId} value={myResult}/>
         {trigger && <AdminDisplayTodayOrders bentoOrders={bentoOrders} names={usersDB}/>}
+
+
+              
       </header>
       </Online>
       <Offline>
         <Navbar/>
         <OfflineMessage/>
       </Offline>
-
     </div>
   );
 }

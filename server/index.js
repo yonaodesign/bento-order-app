@@ -1,23 +1,26 @@
 const express = require("express");
 const usersDB = require("./data/userDB");
-const bentoOrders = require("./data/bentoOrdersDB");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
 const pcsclite = require("@pokusew/pcsclite");
 const pcsc = pcsclite();
+const bcrypt = require('bcrypt')
 
 const app = express();
 const PORT = 8888;
 
 const { Pool } = require("pg");
 const connectionString = process.env.PGSTRING;
-const pool = new Pool({ connectionString });
+// const pool = new Pool({ connectionString });
+
 
 const cardsDB = [
-
+  {hex: "$2b$04$kz5Kq9L6PlHwjY8ehIBCkuE7hmEFJBJMSv/1yaPgaky7BiByhbPFO", user: '253'},
+  {hex: "$2b$04$CTFYGGDQyoPInRAbwfcvbu4emIykNDA4BHvK6bXUDgcTsJ92PsiSS", user: '1'},
+  {hex: "$2b$04$72ULIGJCrrxOnOFeHyUa5OtjDwuWOtfgb3JMBPfoimBG7aT899age", user: '1000'},
+  {hex: "$2b$04$tXyZRtdXhzvwBaORg7ZheOOd.KB4zvbFwCTHOIxA7Fgd5m5.TMrKm", user: '300'},
 ];
-
 const newArray = [];
 const sessionsDB = [{ timestamp: "2022-05-22T05:56:26.766Z", user: "253" }];
 
@@ -76,7 +79,7 @@ pcsc.on("reader", (reader) => {
               // console.table(newArray)
 
               const discoveredUser = cardsDB.find(
-                (e) => e.hexid == newArray[newArray.length - 1].atr
+                (e) => e.hex == newArray[newArray.length - 1].atr
               );
               discoveredUser == undefined
                 ? console.warn(newArray[newArray.length - 1])

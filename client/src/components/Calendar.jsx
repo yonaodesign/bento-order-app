@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import CalendarDays from './calendar-days';
 import './calendar.css';
+import {store} from '../app/store';
+const state = store.getState();
 
 export default class Calendar extends Component {
   constructor() {
@@ -10,7 +12,6 @@ export default class Calendar extends Component {
     this.state = {currentDay: new Date()}
   }
 
-  
   changeCurrentDay = (day) => {
 
     const formatDate = `${day.year}-${day.month+1}-${day.number}`;
@@ -26,8 +27,6 @@ export default class Calendar extends Component {
       {
         console.log('👆 Firing: Adding the date to the DB.');
         this.props.stateChanger([...this.props.bentoOrders, { userId: this.props.name, dateId: formatDate, type: "day" }])
-
-
         // INSERT INTO ordersDB (orderId, userId, dateId, type, timestamp) VALUES (uuid_generate_v4(), 253, '2022-5-16', 'day', '2022'),
       }
     }
@@ -38,15 +37,15 @@ export default class Calendar extends Component {
 
   render() {
     return (
-
+      <>
       <div className="calendar">
         <div className="calendar-header">
           <h2>{this.state.currentDay.getFullYear()}{'年'}{this.months[this.state.currentDay.getMonth()]}{'月'}</h2>
           <div>{this.state.currentDay.getMonth()+1}{'月のお弁当の注文回数は'}{Object.keys(this.props.bentoOrders.filter(e=>e.userId == this.props.name && e.dateId.split('-')[0]==this.state.currentDay.getFullYear() && e.dateId.split('-')[1]==this.state.currentDay.getMonth()+1)).length + '回です。'}
         {'見通しの価格は'}{Object.keys(this.props.bentoOrders.filter(e=>e.userId == this.props.name && e.dateId.split('-')[0]==this.state.currentDay.getFullYear() && e.dateId.split('-')[1]==this.state.currentDay.getMonth()+1)).length*200+'円です。'}
         </div>
+        </div>     
 
-        </div>
         <div className="calendar-body">
           <div className="table-header">
             {
@@ -58,6 +57,6 @@ export default class Calendar extends Component {
           <CalendarDays orders={this.props.value} day={this.state.currentDay} changeCurrentDay={this.changeCurrentDay} />
         </div>
       </div>
-    )
+      </>)
   }
 }

@@ -6,9 +6,7 @@ const pcsc = pcsclite();
 
 
 const cardsDB = [
-    {hex: "3b8f8001804f0ca000000306030001000000006a", user: '253'},
-    {hex: "3b8f8001804f0ca00000030611003b0000000042", user: '1'},
-    {hex: "3b888001004b51ffb381d1000f", user: '1000'},
+    {hex: "xxxx", user: '253'}
 ];
 const newArray = [];
 const sessionsDB = [
