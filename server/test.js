@@ -4,10 +4,6 @@ const pcsclite = require('@pokusew/pcsclite');
 const pcsc = pcsclite();
 
 //DB
-const { Pool } = require('pg');
-const connectionString = 'postgresql://hkepocrz:SAgETHlFFHZwmCCbKyB9-iZJuPXBpthR@arjuna.db.elephantsql.com:5432/hkepocrz';
-const pool = new Pool({connectionString});
-
 pool.connect((err, client, done) => {
     if (err) console.error(err.message)
     console.log('🔼　Connected to PostgreSQL successfully.')
