@@ -33,7 +33,9 @@ useEffect(() => {
 console.table(bentoOrders)
 
 const [loggedUser, setLoggedUser] = useState({loggedUserId: 253, displayName: "Satoru Jon"})
-  const [trigger, setTrigger] = useState(false)
+
+
+const [trigger, setTrigger] = useState(false)
   const myResult = bentoOrders.filter(order => order.userid == loggedUser.loggedUserId)
 
   const SwitcherBar = styled.div`

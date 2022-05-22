@@ -3,20 +3,7 @@ const app = express();
 const pcsclite = require('@pokusew/pcsclite');
 const pcsc = pcsclite();
 
-//DB
-pool.connect((err, client, done) => {
-    if (err) console.error(err.message)
-    console.log('🔼　Connected to PostgreSQL successfully.')
-  });
 
-
-//DEV
-// const cardsDB = [
-//     {hex: "3b8f8001804f0ca000000306030001000000006a", user: '253 ｳﾞｫﾙﾆｰ ﾖﾅｰｼｭ（会社のカード）'},
-//     {hex: "3b8f8001804f0ca00000030611003b0000000042", user: 'ICOCA 🚃'},
-//     {hex: "3b888001004b51ffb381d1000f", user: 'My Number 🐇'},
-//     {hex: "3b8e800180318066b1840c016e01830090001c", user: 'EPOSクレジットカード'}
-// ]
 
 const cardsDB = [
     {hex: "3b8f8001804f0ca000000306030001000000006a", user: '253'},
@@ -94,7 +81,6 @@ pcsc.on('error', err => {
 
 
 //BACK-END ROUTES
-
 app.get('/login', async (req, res)=>{
     await pool.query("INSERT INTO bentosessions (timestamp, userid) VALUES ($1, $2) RETURNING *",
     [sessionsDB[sessionsDB.length-1].timestamp, sessionsDB[sessionsDB.length-1].user])
